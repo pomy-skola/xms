@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page_title|default('XMS') }}{% endblock %}</title>
+    <!-- Add your CSS in static/styles.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Domů</a>
+        <!-- přidejte další odkazy sem -->
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <small>&copy; {{ current_year if current_year is defined else '' }} XMS</small>
+    </footer>
+
+    <!-- Skripty -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

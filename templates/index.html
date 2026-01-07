@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Domů — {{ super() }}{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Vítejte v XMS</h1>
+    <p>Toto je ukázková HTML5 šablona pro routu <code>/</code>.</p>
+
+    <div class="tree-wrap">
+      <img src="{{ url_for('static', filename='images/tree.jpg') }}" alt="Vánoční strom" class="tree-base">
+      {% if overlay_files %}
+        <div class="overlay">
+          {% for file in overlay_files %}
+            <img src="{{ url_for('static', filename=file) }}" alt="" class="overlay-img">
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <form method="get" action="{{ url_for('hello_world') }}" class="item-form">
+      <fieldset>
+        <legend>Vyberte položky (můžete vybrat více):</legend>
+        <label>
+          <input type="checkbox" name="items" value="svíčky" {% if 'svíčky' in selected_items %}checked{% endif %}>
+          Svíčky
+        </label>
+        <label>
+          <input type="checkbox" name="items" value="koule" {% if 'koule' in selected_items %}checked{% endif %}>
+          Koule
+        </label>
+        <label>
+          <input type="checkbox" name="items" value="řetěz" {% if 'řetěz' in selected_items %}checked{% endif %}>
+          Řetěz
+        </label>
+      </fieldset>
+
+      <p>
+        <button type="submit">Odeslat</button>
+      </p>
+    </form>
+
+    {% if selected_items %}
+      <section class="selection-result">
+        <h2>Vybrali jste:</h2>
+        <ul>
+          {% for it in selected_items %}
+            <li>{{ it }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    <p>Úpravy: nahraďte obsah podle potřeby.</p>
+  </section>
+{% endblock %}
